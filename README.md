@@ -1,39 +1,31 @@
+[TOC]
+
 # Motivation
 
 0. Pure CSS is good and powerful 
 1. Modularity - UI and UX are separate instances both independent of BL
 2. DOM is immutable
 
-# Realization Core
+# Core Schema
 
 ```mermaid
-graph LR
+graph BT
 User((User))
+subgraph DOM
 label["&lt;label>"]
 input["&lt;input value=...>"]
-Browser((Browser))
 element["&lt;element style=...>"]
+end
+Browser((Browser))
+Script((Some Program))
 
-User --interacts--> label
-label --changes--> input
-input --fires--> Browser
-Browser --changes by CSS--> element
-element --shown to--> User
-```
-
-```mermaid
-sequenceDiagram
-participant User
-participant label as <label>
-participant input as <input value=...>
-participant Browser
-participant element as <element style=...>
-
-User ->> label :interacts
-label ->> input :changes
-input ->> Browser :fires
-Browser ->> element :changes by CSS
-element ->> User :shown to
+User ==>|clicks| label
+label -->|changes| input
+Script ==>|can set| input
+input -->|fires| Browser
+Browser -->|updates by CSS| element
+input -.->|magic| element
+element -.->|is shown to| User
 ```
 
 
