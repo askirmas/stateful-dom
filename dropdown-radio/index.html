@@ -1,3 +1,6 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../index.css" rel="stylesheet">
+
 <form id="main" name="main">
   <!--state-->
   <input class="state" name="prop" value="0" id="prop-0" type="radio" checked />
@@ -5,9 +8,9 @@
   <input class="state" name="prop" value="2" id="prop-2" type="radio" />
   <!--controller -->
   <controller>
-    <label for="prop@mobile" data-from="prop-0" class="selective" tabindex="0"></label>
-    <label for="prop@mobile" data-from="prop-1" class="selective" tabindex="0"></label>
-    <label for="prop@mobile" data-from="prop-2" class="selective" tabindex="0"></label>
+    <label for="prop@mobile" data-for="prop-0" class="selective" tabindex="0"></label>
+    <label for="prop@mobile" data-for="prop-1" class="selective" tabindex="0"></label>
+    <label for="prop@mobile" data-for="prop-2" class="selective" tabindex="0"></label>
 
     <select class="GhostControllerForMobile" id="prop@mobile" onchange="document.getElementById(this.value).checked = true">
       <option value="prop-0">0</option>
@@ -20,13 +23,31 @@
     <label class="dropdownable" for="prop-2"></label>  
   </controller>
 </form>
+<style data-title="Viewer">
+  .state#prop-0:not(:checked) ~ * *[data-for=prop-0],
+  .state#prop-1:not(:checked) ~ * *[data-for=prop-1],
+  .state#prop-2:not(:checked) ~ * *[data-for=prop-2] {
+    display: none
+  }
+</style>
+<style data-title="Dropdown specific">
+  /* Hide on second click*/
+  .state[name=prop]:checked ~ controller:focus-within .selective{
+    z-index: -1;
+  }
+  /* Hide after choice */
+  .state[name=prop]:checked ~ controller:not(:focus-within) .dropdownable {
+    height: 0% !important;
+    transition-delay: var(--HACK-DROPDOWN-LAG) !important; 
+  }
+</style>
 <style data-title="Estetic">
   #main, controller {
     display: grid;
     grid-auto-flow: row;
   }
   controller > .selective::after {
-    content: attr(data-from);
+    content: attr(data-for);
   }
   controller > .dropdownable::after {
     content: attr(for);
@@ -38,34 +59,4 @@
 
     transition: all 1s ease;
   }
-</style>
-<style data-title="Common">
-:root {
-  --HACK-LAG: 0.3s;
-}
-.state {
-  display: none;
-}
-.GhostControllerForMobile, .GhostControllerForMobile * {
-  position: absolute;
-  opacity: 0;
-  height: 0;
-}
-
-.state#prop-0:not(:checked) ~ controller *[data-from=prop-0],
-.state#prop-1:not(:checked) ~ controller *[data-from=prop-1],
-.state#prop-2:not(:checked) ~ controller *[data-from=prop-2] {
-  display: none
-}
-</style>
-<style data-title="Dropdown specific">
-/* Hide on second click*/
-.state:checked ~ controller:focus-within .selective{
-  z-index: -1;
-}
-/* Hide after choice */
-.state:checked ~ controller:not(:focus-within) .dropdownable {
-  height: 0% !important;
-  transition-delay: var(--HACK-LAG);
-}
 </style>

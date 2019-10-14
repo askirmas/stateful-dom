@@ -1,6 +1,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../index.css" rel="stylesheet">
+
+<label for="prop">tile -> table</label>
 <!-- Easy view switch-->
-<input id="state" type="checkbox" checked/> 
+<input class="state" name="prop" id="prop" type="checkbox" checked/> 
 <!--data-->
 <data id="data">
   <Headers>
@@ -53,10 +56,10 @@
   #data *[key="D"] {
     --key: D;
   }
-  #state:not(:checked) ~ #data > * > * {
+  #prop:not(:checked) ~ #data > * > * {
     grid-area: var(--key);
   }
-  #state:checked ~ #data > * > * {
+  #prop:checked ~ #data > * > * {
     grid-column: var(--key);
   }
 
@@ -68,30 +71,30 @@
 </style>
 <style data-title="Containerize">
   /* Tile */
-  #state:not(:checked) ~ #data {
+  #prop:not(:checked) ~ #data {
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   }
-  #state:not(:checked) ~ #data > Headers {
+  #prop:not(:checked) ~ #data > Headers {
     grid-column: 1 / -1;
   }
 
   /* Table */
-  #state:checked ~ #data > * {
+  #prop:checked ~ #data > * {
     display: contents;
   }
-  #state:checked ~ #data {
+  #prop:checked ~ #data {
     grid-template-columns: var(--view-table);
   }
 </style>
 <style data-title="Entities stuff">
-  #state:not(:checked) ~ #data > ItemContainer {
+  #prop:not(:checked) ~ #data > ItemContainer {
     display: grid;
     grid-template-areas: var(--view-tile);
   }
-  #state:checked ~ #data {
+  #prop:checked ~ #data {
     grid-auto-flow: dense; /*For reordered columns, but all items should have each prop. Note: ```counters``` not work outside ```content``` */
   }
-  #state:not(:checked) ~ #data > Headers > Header:not(:first-child) {
+  #prop:not(:checked) ~ #data > Headers > Header:not(:first-child) {
     display: none;
   }
 </style>

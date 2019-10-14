@@ -1,0 +1,19 @@
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+:root {
+  user-select: none;
+  --HACK-DROPDOWN-LAG: 0.3s;
+}
+
+input.state {
+  display: none;
+}
+.GhostControllerForMobile, .GhostControllerForMobile * {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+}
+
+label {
+  cursor: pointer;
+}

@@ -1,34 +1,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="../index.css" rel="stylesheet">
 
 <!--state-->
-<input id="state" type="checkbox"/>
+<input class="state" id="state" type="checkbox"/>
 <!--data-->
 <label for="state">
   Expand
-  <i data-for-state="0" class="material-icons">toggle_off</i>
-  <i data-for-state="1" class="material-icons">toggle_on</i>
+  <i data-for="state-0" class="material-icons">toggle_off</i>
+  <i data-for="state-1" class="material-icons">toggle_on</i>
 </label>
 <div>
-  <div for="state" data-for-state="1">
+  <div for="state" data-for="state-1">
     different stuff
     <label for="state">
       <i class="material-icons">close</i>
     </label>
   </div>
 </div>
-<style>
-#state, *[data-for-state] {
+<style data-title="Viewer">
+#state:checked ~ *[for="state"][data-for="state-0"],
+#state:checked ~ *[for="state"] *[data-for="state-0"],
+#state:checked ~ * *[for="state"][data-for="state-0"],
+#state:checked ~ * *[for="state"] *[data-for="state-0"],
+
+#state:not(:checked) ~ *[for="state"][data-for="state-1"],
+#state:not(:checked) ~ *[for="state"] *[data-for="state-1"],
+#state:not(:checked) ~ * *[for="state"][data-for="state-1"],
+#state:not(:checked) ~ * *[for="state"] *[data-for="state-1"] {
   display: none;
-}  
-#state:not(:checked) ~ *[for="state"][data-for-state="0"],
-#state:not(:checked) ~ *[for="state"] *[data-for-state="0"],
-#state:not(:checked) ~ * *[for="state"][data-for-state="0"],
-#state:not(:checked) ~ * *[for="state"] *[data-for-state="0"],
-#state:checked ~ *[for="state"][data-for-state="1"],
-#state:checked ~ *[for="state"] *[data-for-state="1"],
-#state:checked ~ * *[for="state"][data-for-state="1"],
-#state:checked ~ * *[for="state"] *[data-for-state="1"] {
-  display: initial;
 }
 </style>
