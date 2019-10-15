@@ -18,31 +18,35 @@
       <option value="prop-2">2</option>
     </select>
     
-    <label class="dropdownable" for="prop-0"></label>
-    <label class="dropdownable" for="prop-1"></label>
-    <label class="dropdownable" for="prop-2"></label>  
+    <label tabindex="0" class="dropdownable" for="prop-0"></label>
+    <label tabindex="0" class="dropdownable" for="prop-1"></label>
+    <label tabindex="0" class="dropdownable" for="prop-2"></label>  
   </controller>
 </form>
 <style data-title="Viewer">
   #prop-0:not(:checked)~[data-for="prop-0"],
   #prop-0:not(:checked)~* [data-for="prop-0"],
+
   #prop-1:not(:checked)~[data-for="prop-1"],
   #prop-1:not(:checked)~* [data-for="prop-1"],
+
   #prop-2:not(:checked)~[data-for="prop-2"],
-  #prop-2:not(:checked)~* [data-for="prop-2"] {
+  #prop-2:not(:checked)~* [data-for="prop-2"],
+  
+  /* Hide after choice */
+  #prop-0:checked~* [for="prop-0"]:focus,
+  #prop-1:checked~* [for="prop-1"]:focus,
+  #prop-2:checked~* [for="prop-2"]:focus,
+  controller:not(:focus-within) > .dropdownable {
     display: none
   }
 </style>
 <style data-title="Dropdown specific">
   /* Hide on second click*/
-  .state[name=prop]:checked ~ controller:focus-within .selective{
+  .state[name=prop]:checked ~ controller:focus-within .selective {
     z-index: -1;
   }
-  /* Hide after choice */
-  .state[name=prop]:checked ~ controller:not(:focus-within) .dropdownable {
-    height: 0% !important;
-    transition-delay: var(--HACK-DROPDOWN-LAG) !important; 
-  }
+
 </style>
 <style data-title="Estetic">
   #main, controller {
