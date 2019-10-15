@@ -1,12 +1,14 @@
+#  [Stateful DOM](https://askirmas.github.io/stateful-dom/index.html)
+
 [TOC]
 
-# Motivation
+## Motivation
 
 0. Pure CSS is good and powerful 
 1. Modularity - UI and UX are separate instances both independent of BL
 2. DOM is immutable
 
-# Core Schema
+## Core Schema
 
 Looks like pure M (input + browser + render) V (css) C (label)
 
@@ -24,15 +26,15 @@ label --changes--> input
 Script ==can set==> input
 input --fires--> Browser
 Browser --renders by CSS--> element
-input -.magic.-> element
+input -.<i>magic<br>via Browser</i>.-> element
 element -.is shown to.-> User
 
 User((User))
 
 subgraph DOM
-label["&lt;label>"]
-input["&lt;input value=...>"]
-element["&lt;element>"]
+label("&lt;label>")
+input("&lt;input value=...>")
+element("&lt;element>")
 end
 
 Browser((Browser))
@@ -40,14 +42,14 @@ Script((Some Program))
 
 ```
 
-# Derivation
+## Derivation
 
-## ERM
+### ERM - Relations
 
-- `entity`-`<input>` n-1 or 1-1
-- `<label>`-`<input>` n-1
+- `entry`-`<input>`: 1-to-1 or 1-to-many
+- `<label>`-`<input>` :many-to-1
 
-- `<input>`-`<element>` n-m
+- `<input>`-`<element>`: many-to-many
 
 ```mermaid
 graph LR
@@ -72,38 +74,36 @@ input2 --> element1
 inputX --> element1
 input2 --> element2
 
-subgraph entities
-property0
-property1
-property0:value0
-property0:value1
-property1:value1
+subgraph All possible Object.entries
+property0:value0["[property0, value0]"]
+property0:value1["[property0, value1]"]
+property1:value1["[property1, value1]"]
 end
 
-subgraph labels
-label4
-label0
-label1
-label2
+subgraph <label>s
+label4("&lt;label #4>")
+label0("&lt;label #0>")
+label1("&lt;label #1>")
+label2("&lt;label #2>")
 end
 
-subgraph inputs 
-input0
-inputX
-input1
-input2
+subgraph <input>s 
+input0("&lt;input #0>")
+inputX("&lt;input #X>")
+input1("&lt;input #1>")
+input2("&lt;input #2>")
 end
 
-subgraph elements
-element1
-element0
-element2
+subgraph <element>s
+element1("&lt;element #1>")
+element0("&lt;element #0>")
+element2("&lt;element #2>")
 end
 ```
 
 
 
-## Dependencies
+### Dependencies
 
 ```mermaid
 graph LR
@@ -126,7 +126,7 @@ end
 
 subgraph CSSRule
 state["<b>if</b> (state.property <b>!==</b> value)<br>---<br>$identifier:not(:checked)"]
-further["<b>then</b><br>---<br>+ ~ > *"]
+further{"<b>then</b><br>---<br>+ ~ > *"}
 target["element.style<br>---<br>$target"]
 end
 
@@ -136,7 +136,7 @@ subgraph StyleDescription
 body[":= {..}; <b>fi</b><br>---<br>{@content}"]
 end
 
-subgraph requirements
+subgraph 
 for-id{for-id}
 $description{$description}
 end
@@ -170,21 +170,23 @@ fId ==> $description
 
 
 
-# Research Overview
 
-## [Dropdown](dropdown-radio/index.html)
+
+## Research Overview
+
+### [Dropdown](dropdown-radio/index.html)
 
 1 enum state, 3*`<input type=radio>`. 
 
 Substitution for not designable `<select>`.
 
-## [Toggler](toggler/index.html)
+### [Toggler](toggler/index.html)
 
 1 boolean state, 1*`<input type=checkout>`.
 
 Show/hide further elements.
 
-## [Views](views/index.html)
+### [Views](views/index.html)
 
 1 boolean state, 1*`<input type=checkout>`.
 
