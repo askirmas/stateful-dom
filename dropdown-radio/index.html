@@ -24,9 +24,12 @@
   </controller>
 </form>
 <style data-title="Viewer">
-  .state#prop-0:not(:checked) ~ * *[data-for=prop-0],
-  .state#prop-1:not(:checked) ~ * *[data-for=prop-1],
-  .state#prop-2:not(:checked) ~ * *[data-for=prop-2] {
+  #prop-0:not(:checked)~[data-for="prop-0"],
+  #prop-0:not(:checked)~* [data-for="prop-0"],
+  #prop-1:not(:checked)~[data-for="prop-1"],
+  #prop-1:not(:checked)~* [data-for="prop-1"],
+  #prop-2:not(:checked)~[data-for="prop-2"],
+  #prop-2:not(:checked)~* [data-for="prop-2"] {
     display: none
   }
 </style>
