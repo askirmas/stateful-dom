@@ -1,0 +1,65 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../index.css" rel="stylesheet">
+
+<form id="main" name="main">
+  <!--state-->
+  <input class="state" name="prop" value="0" id="prop-0" type="radio" checked />
+  <input class="state" name="prop" value="1" id="prop-1" type="radio" />
+  <input class="state" name="prop" value="2" id="prop-2" type="radio" />
+  <!--controller -->
+  <controller>
+    <label for="prop@mobile" data-for="prop-0" class="selective" tabindex="0"></label>
+    <label for="prop@mobile" data-for="prop-1" class="selective" tabindex="0"></label>
+    <label for="prop@mobile" data-for="prop-2" class="selective" tabindex="0"></label>
+
+    <select class="GhostControllerForMobile" id="prop@mobile" onchange="document.getElementById(this.value).checked = true">
+      <option value="prop-0">0</option>
+      <option value="prop-1">1</option>
+      <option value="prop-2">2</option>
+    </select>
+    
+    <label class="dropdownable" for="prop-0"></label>
+    <label class="dropdownable" for="prop-1"></label>
+    <label class="dropdownable" for="prop-2"></label>  
+  </controller>
+</form>
+<style data-title="Viewer">
+  #prop-0:not(:checked)~[data-for="prop-0"],
+  #prop-0:not(:checked)~* [data-for="prop-0"],
+  #prop-1:not(:checked)~[data-for="prop-1"],
+  #prop-1:not(:checked)~* [data-for="prop-1"],
+  #prop-2:not(:checked)~[data-for="prop-2"],
+  #prop-2:not(:checked)~* [data-for="prop-2"] {
+    display: none
+  }
+</style>
+<style data-title="Dropdown specific">
+  /* Hide on second click*/
+  .state[name=prop]:checked ~ controller:focus-within .selective{
+    z-index: -1;
+  }
+  /* Hide after choice */
+  .state[name=prop]:checked ~ controller:not(:focus-within) .dropdownable {
+    height: 0% !important;
+    transition-delay: var(--HACK-DROPDOWN-LAG) !important; 
+  }
+</style>
+<style data-title="Estetic">
+  #main, controller {
+    display: grid;
+    grid-auto-flow: row;
+  }
+  controller > .selective::after {
+    content: attr(data-for);
+  }
+  controller > .dropdownable::after {
+    content: attr(for);
+    background-color: inherit;
+  }
+  #main > *, #main > controller .dropdownable {
+    overflow: hidden;
+    height: 100%;
+
+    transition: all 1s ease;
+  }
+</style>
