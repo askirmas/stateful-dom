@@ -2,6 +2,7 @@
 
 :root {
   user-select: none;
+  --HACK-DROPDOWN-LAG: 0.001s;
 }
 
 input.state {

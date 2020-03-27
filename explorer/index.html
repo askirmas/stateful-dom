@@ -1,0 +1,36 @@
+<script>
+function appender() {
+  document.querySelectorAll('template')
+  .forEach(({id}) => customElements.define(id,
+    class extends HTMLElement {
+      constructor() {
+        super()
+        this
+        .attachShadow({mode: 'open'})
+        .append(
+          document.getElementById(id)
+          .content
+          .cloneNode(true),
+          ...this.childNodes
+        )
+      }
+    })
+  )
+}
+window.addEventListener('DOMContentLoaded', appender)
+</script>
+
+<style>
+  my-paragraph {
+    color: red;
+    background-color: #666;
+    padding: 5px;
+  }
+</style>
+
+<template id="my-paragraph">
+  My paragraph
+</template>
+
+<my-paragraph>2</my-paragraph>
+<my-paragraph>1</my-paragraph>

@@ -1,5 +1,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../custom_appender.js"></script>
 <link href="../index.css" rel="stylesheet">
+
+<template id="ItemContainer">
+  <slot name="id"></slot>
+  <slot name="owner"></slot>
+  <slot name="title"></slot>
+  <slot name="status"></slot>
+</template>
 
 <label for="prop">tile -> table</label>
 <!-- Easy view switch-->
@@ -13,7 +21,7 @@
     <Header key="D"></Header>
   </Headers>
   <ItemContainer>
-    <Property key="A">A0</Property>
+    <Property slot="name">A0</Property>
     <Property key="B">B0</Property>
     <Property key="C">C0</Property>
     <Property key="D">D0</Property>

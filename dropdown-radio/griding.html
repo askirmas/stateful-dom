@@ -1,0 +1,60 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../index.css" rel="stylesheet">
+
+<form id="main" name="main">
+
+  <!--controller -->
+  <controller tabindex=0>
+    <!--state-->
+    <input class="state" name="prop" value="0" id="prop-0" type="radio" checked />
+    <label tabindex=0 class="dropdownable" for="prop-0"></label>
+
+    <input class="state" name="prop" value="1" id="prop-1" type="radio" />
+    <label tabindex=0 class="dropdownable" for="prop-1"></label>
+
+    <input class="state" name="prop" value="2" id="prop-2" type="radio" />
+    <label tabindex=0 class="dropdownable" for="prop-2"></label>  
+  </controller>
+</form>
+<style data-title="Viewer">
+  .state:not(:checked) + .dropdownable {
+    /*display: none;*/
+  }
+  .state:checked + .dropdownable {
+    
+  }
+  .controller .state + .dropdownable {
+    display: block;
+    background-color: green;
+  }
+
+  .controller:focus {
+    background-color: red;
+  }
+  .controller:focus-within {
+    background-color: blue;
+  }
+
+  /*.state:checked + .dropdownable:focus, */
+  /*controller:not(:focus):not(:focus-within) .state:not(:checked) + .dropdownable {
+    display: none
+  }
+  .state:checked + .dropdownable {
+    pointer-events: none;
+  }*/
+</style>
+<style data-title="Estetic">
+  #main, controller {
+    display: grid;
+    grid-auto-flow: row;
+    background-color: transparent;
+  }
+  controller .dropdownable::after {
+    content: attr(for);
+    background-color: inherit;
+  }
+
+  *:focus {
+    outline: none;
+  }
+</style>

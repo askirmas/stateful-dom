@@ -2,68 +2,80 @@
 <link href="../index.css" rel="stylesheet">
 
 <form id="main" name="main">
+
   <!--state-->
   <input class="state" name="prop" value="0" id="prop-0" type="radio" checked />
   <input class="state" name="prop" value="1" id="prop-1" type="radio" />
   <input class="state" name="prop" value="2" id="prop-2" type="radio" />
-  <!--controller -->
-  <controller>
-    <label for="prop@mobile" data-for="prop-0" class="selective" tabindex="0"></label>
-    <label for="prop@mobile" data-for="prop-1" class="selective" tabindex="0"></label>
-    <label for="prop@mobile" data-for="prop-2" class="selective" tabindex="0"></label>
 
+  <!--controller -->
+  <div class=controller>
+    <label for="prop@mobile" data-for="prop-0" class="selected" tabindex="0"></label>
+    <label for="prop@mobile" data-for="prop-1" class="selected" tabindex="0"></label>
+    <label for="prop@mobile" data-for="prop-2" class="selected" tabindex="0"></label>
     <select class="GhostControllerForMobile" id="prop@mobile" onchange="document.getElementById(this.value).checked = true">
       <option value="prop-0">0</option>
       <option value="prop-1">1</option>
       <option value="prop-2">2</option>
     </select>
-    
+
     <label tabindex="0" class="dropdownable" for="prop-0"></label>
     <label tabindex="0" class="dropdownable" for="prop-1"></label>
     <label tabindex="0" class="dropdownable" for="prop-2"></label>  
-  </controller>
+  </div>
 </form>
-<style data-title="Viewer">
-  #prop-0:not(:checked)~[data-for="prop-0"],
-  #prop-0:not(:checked)~* [data-for="prop-0"],
 
-  #prop-1:not(:checked)~[data-for="prop-1"],
-  #prop-1:not(:checked)~* [data-for="prop-1"],
-
-  #prop-2:not(:checked)~[data-for="prop-2"],
-  #prop-2:not(:checked)~* [data-for="prop-2"],
-  
+<style>
   /* Hide after choice */
-  #prop-0:checked~* [for="prop-0"]:focus,
-  #prop-1:checked~* [for="prop-1"]:focus,
-  #prop-2:checked~* [for="prop-2"]:focus,
-  controller:not(:focus-within) > .dropdownable {
+  #prop-0:checked~[for="prop-0"]:focus.dropdownable,
+  #prop-0:checked~* [for="prop-0"]:focus.dropdownable,
+
+  #prop-1:checked~[for="prop-1"]:focus.dropdownable,
+  #prop-1:checked~* [for="prop-1"]:focus.dropdownable,
+
+  #prop-2:checked~[for="prop-2"]:focus.dropdownable,
+  #prop-2:checked~* [for="prop-2"]:focus.dropdownable {
+    /*display: none*/
+  }
+</style>
+<style data-title="Viewer">
+  .controller:not(:focus-within) .dropdownable,
+  
+  #prop-0:not(:checked)~[data-for="prop-0"].selected,
+  #prop-0:not(:checked)~* [data-for="prop-0"].selected,
+
+  #prop-1:not(:checked)~[data-for="prop-1"].selected,
+  #prop-1:not(:checked)~* [data-for="prop-1"].selected,
+
+  #prop-2:not(:checked)~[data-for="prop-2"].selected,
+  #prop-2:not(:checked)~* [data-for="prop-2"].selected {
     display: none
   }
 </style>
-<style data-title="Dropdown specific">
-  /* Hide on second click*/
-  .state[name=prop]:checked ~ controller:focus-within .selective {
-    z-index: -1;
+<style>
+  #main {
+    height: 2em;
   }
-
+  .controller {
+    position: relative;
+    height: inherit;
+    grid-auto-rows: 100%;
+  }
 </style>
 <style data-title="Estetic">
-  #main, controller {
+  #main, .controller {
     display: grid;
     grid-auto-flow: row;
+    border: 1px solid black;
   }
-  controller > .selective::after {
+  .controller .selected::after {
     content: attr(data-for);
   }
-  controller > .dropdownable::after {
+  .selected, .dropdownable {
+    
+  }
+  .controller .dropdownable::after {
     content: attr(for);
     background-color: inherit;
-  }
-  #main > *, #main > controller .dropdownable {
-    overflow: hidden;
-    height: 100%;
-
-    transition: all 1s ease;
   }
 </style>

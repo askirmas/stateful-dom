@@ -1,0 +1,12 @@
+<label for="div"></label>
+<div id="div" contenteditable="">edit...</div>
+<label for="ul"></label>
+<ul id="ul" contenteditable="">edit ul...</ul>
+
+<label for="button"></label>
+<button id="button">click</button>
+<style>
+label::before {
+  content: attr(for);
+}
+</style>
