@@ -1,0 +1,25 @@
+{
+  "name": "dom-store",
+  "version": "0.0.0",
+  "description": "[TOC]",
+  "main": "custom_appender.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/askirmas/stateful-dom.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/askirmas/stateful-dom/issues"
+  },
+  "homepage": "https://github.com/askirmas/stateful-dom#readme",
+  "devDependencies": {
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "typescript": "^3.9.7"
+  }
+}
